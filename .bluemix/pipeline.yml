@@ -141,7 +141,7 @@ stages:
       api_key: ${API_KEY}
       region_id: ${COLIGO_REGION}
       resource_group: ${COLIGO_RESOURCE_GROUP}
-      kubernetes_cluster: dummy_cluster
+      kubernetes_cluster: mycluster-free
     script: |-
       #!/bin/bash
 

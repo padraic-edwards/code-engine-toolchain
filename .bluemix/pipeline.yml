@@ -123,38 +123,23 @@ stages:
   - name: COLIGO_PROJECT
     value: ${COLIGO_PROJECT}
     type: text
-  - name: SERVICE_FILE_UPDATE_INSTRUCTIONS
-    value:
-      $text: service_update_instructions.yaml
-    type: text
   - name: SERVICE_FILE
     value: service.yaml
-    type: text
-  - name: SERVICE_FILE_UPDATE_INSTRUCTIONS_FILE
-    value: service_update_instructions.yaml
     type: text
   jobs:
   - name: Deploy
     type: deployer
-    # deploy_type: kubernetes
+    deploy_type: kubernetes
     target:
       api_key: ${API_KEY}
       region_id: ${COLIGO_REGION}
       resource_group: ${COLIGO_RESOURCE_GROUP}
-      kubernetes_cluster: mycluster-free
+      kubernetes_cluster: dummy-value
     script: |-
       #!/bin/bash
 
       # View build properties
       cat build.properties
-
-      # echo "Configuring cluster role binding"
-      # if kubectl get clusterrolebinding kube-system:default; then
-      #   echo -e "Cluster role binding found."
-      # else
-      #   kubectl create clusterrolebinding kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default
-      #   echo -e "Cluster role binding created."
-      # fi
 
       ibmcloud plugin install coligo
 
@@ -181,7 +166,7 @@ stages:
       export IMAGE_URL=${REGISTRY_URL}/${REGISTRY_NAMESPACE}/${IMAGE_NAME}:${BUILD_NUMBER}
 
       eval "cat << EOF | kubectl apply -f -
-      $(cat service.yaml)
+      $(cat ${SERVICE_FILE})
       EOF"
 
       echo "Checking if application is ready..."
@@ -240,12 +225,12 @@ stages:
     - name: IMAGE_NAME
       value: ${IMAGE_NAME}
       type: text
-    # deploy_type: kubernetes
+    deploy_type: kubernetes
     target:
       api_key: ${API_KEY}
       region_id: ${COLIGO_REGION}
       resource_group: ${COLIGO_RESOURCE_GROUP}
-      kubernetes_cluster: mycluster-free
+      kubernetes_cluster: dummy-value
     script: |-
       export KUBE_SERVICE_NAME=${IMAGE_NAME}
 

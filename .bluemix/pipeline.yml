@@ -224,13 +224,6 @@ stages:
       echo -e "View the application at: $APPLICATION_URL"
   - name: Test
     type: deployer
-    properties:
-    - name: COLIGO_PROJECT
-      value: ${COLIGO_PROJECT}
-      type: text
-    - name: SERVICE_FILE
-      value: service.yaml
-      type: text
     deploy_type: kubernetes
     target:
       api_key: ${API_KEY}

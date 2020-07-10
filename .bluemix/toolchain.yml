@@ -59,7 +59,7 @@ services:
           API_KEY: '{{form.pipeline.parameters.api-key}}'
           CODE_ENGINE_PROJECT: '{{form.pipeline.parameters.code-engine-project}}'
           CODE_ENGINE_REGION: '{{form.pipeline.parameters.code-engine-region}}'
-          CODE_RESOURCE_GROUP: '{{form.pipeline.parameters.code-engine-resource-group}}'
+          CODE_ENGINE_RESOURCE_GROUP: '{{form.pipeline.parameters.code-engine-resource-group}}'
         execute: true
   webide:
     service_id: orion

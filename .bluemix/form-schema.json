@@ -58,18 +58,18 @@
       "type": "string",
       "pattern": "^[a-z0-9_]"
     },
-    "coligo-project": {
-      "description": "Coligo Project",
+    "code-engine-project": {
+      "description": "Code Engine Project",
       "type": "string",
       "pattern": "^[a-z0-9_]"
     },
-    "coligo-region": {
-      "description": "Coligo Region",
+    "code-engine-region": {
+      "description": "Code Engine Region",
       "type": "string",
       "pattern": "^[a-z0-9_]"
     },
-    "coligo-resource-group": {
-      "description": "Coligo Resource Group",
+    "code-engine-resource-group": {
+      "description": "Code Engine Resource Group",
       "type": "string",
       "validator": {
         "v-type": "resource-group",
@@ -84,9 +84,9 @@
     "api-key",
     "registry-region",
     "registry-namespace",
-    "coligo-project",
-    "coligo-region",
-    "coligo-resource-group"
+    "code-engine-project",
+    "code-engine-region",
+    "code-engine-resource-group"
   ],
   "form": [
     {
@@ -168,7 +168,7 @@
       "items": [
         {
           "type": "label",
-          "title": "Coligo Region"
+          "title": "Code Engine Region"
         },
         {
           "type": "label",
@@ -176,7 +176,7 @@
         },
         {
           "type": "label",
-          "title": "Coligo Resource Group"
+          "title": "Code Engine Resource Group"
         },
         {
           "type": "label",
@@ -184,11 +184,11 @@
         },
         {
           "type": "label",
-          "title": "Coligo Project"
+          "title": "Code Engine Project"
         },
         {
           "type": "select",
-          "key": "coligo-region",
+          "key": "code-engine-region",
           "readonly": false
         },
         {
@@ -197,7 +197,7 @@
         },
         {
           "type": "select",
-          "key": "coligo-resource-group",
+          "key": "code-engine-resource-group",
           "readonly": false
         },
         {
@@ -206,7 +206,7 @@
         },
         {
           "type": "select",
-          "key": "coligo-project",
+          "key": "code-engine-project",
           "readonly": false
         }
       ]

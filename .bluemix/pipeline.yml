@@ -120,8 +120,8 @@ stages:
   - name: API_KEY
     value: ${API_KEY}
     type: secure
-  - name: COLIGO_PROJECT
-    value: ${COLIGO_PROJECT}
+  - name: CODE_ENGINE_PROJECT
+    value: ${CODE_ENGINE_PROJECT}
     type: text
   - name: SERVICE_FILE
     value: service.yaml
@@ -132,8 +132,8 @@ stages:
     deploy_type: kubernetes
     target:
       api_key: ${API_KEY}
-      region_id: ${COLIGO_REGION}
-      resource_group: ${COLIGO_RESOURCE_GROUP}
+      region_id: ${CODE_ENGINE_REGION}
+      resource_group: ${CODE_ENGINE_RESOURCE_GROUP}
       kubernetes_cluster: dummy-value
     script: |-
       #!/bin/bash
@@ -143,16 +143,16 @@ stages:
 
       ibmcloud plugin install coligo
 
-      echo "Check Coligo project availability"
-      if ibmcloud coligo project get --name ${COLIGO_PROJECT}; then
-        echo -e "Coligo project ${COLIGO_PROJECT} found."
+      echo "Check Code Engine project availability"
+      if ibmcloud coligo project get --name ${CODE_ENGINE_PROJECT}; then
+        echo -e "Code Engine project ${CODE_ENGINE_PROJECT} found."
       else
-        ibmcloud coligo project create --name ${COLIGO_PROJECT}
-        echo -e "Coligo project ${COLIGO_PROJECT} created."
+        ibmcloud coligo project create --name ${CODE_ENGINE_PROJECT}
+        echo -e "Code Engine project ${CODE_ENGINE_PROJECT} created."
       fi
 
       echo "Load Kube config"
-      eval "$(ibmcloud coligo target --name ${COLIGO_PROJECT} | grep export)"
+      eval "$(ibmcloud coligo target --name ${CODE_ENGINE_PROJECT} | grep export)"
 
       echo -e "Configuring access to private image registry"
       IMAGE_PULL_SECRET_NAME="ibmcloud-toolchain-${PIPELINE_TOOLCHAIN_ID}-${REGISTRY_URL}"
@@ -227,14 +227,14 @@ stages:
     deploy_type: kubernetes
     target:
       api_key: ${API_KEY}
-      region_id: ${COLIGO_REGION}
-      resource_group: ${COLIGO_RESOURCE_GROUP}
+      region_id: ${CODE_ENGINE_REGION}
+      resource_group: ${CODE_ENGINE_RESOURCE_GROUP}
       kubernetes_cluster: dummy-value
     script: |-
       ibmcloud plugin install coligo
 
       echo "Load Kube config"
-      eval "$(ibmcloud coligo target --name ${COLIGO_PROJECT} | grep export)"
+      eval "$(ibmcloud coligo target --name ${CODE_ENGINE_PROJECT} | grep export)"
 
       # Get kube service name from metadata name in service file
       export KUBE_SERVICE_NAME=$(yq read $SERVICE_FILE metadata.name)

@@ -20,7 +20,7 @@ template:
 toolchain:
   name: >
     $env.toolchainName ? '{{toolchainName}}' :
-      'coligo-toolchain-{{timestamp}}'
+      'code-engine-toolchain-{{timestamp}}'
   template:
     getting_started:
       $ref: "#/messages/template.gettingStarted"
@@ -57,9 +57,9 @@ services:
           REGISTRY_REGION_ID: '{{form.pipeline.parameters.registry-region}}'
           REGISTRY_NAMESPACE: '{{form.pipeline.parameters.registry-namespace}}'
           API_KEY: '{{form.pipeline.parameters.api-key}}'
-          COLIGO_PROJECT: '{{form.pipeline.parameters.coligo-project}}'
-          COLIGO_REGION: '{{form.pipeline.parameters.coligo-region}}'
-          COLIGO_RESOURCE_GROUP: '{{form.pipeline.parameters.coligo-resource-group}}'
+          CODE_ENGINE_PROJECT: '{{form.pipeline.parameters.code-engine-project}}'
+          CODE_ENGINE_REGION: '{{form.pipeline.parameters.code-engine-region}}'
+          CODE_RESOURCE_GROUP: '{{form.pipeline.parameters.code-engine-resource-group}}'
         execute: true
   webide:
     service_id: orion
@@ -72,8 +72,8 @@ form:
       registry-region: '{{registryRegion}}'
       registry-namespace: '{{registryNamespace}}'
       api-key: '{{apiKey}}'
-      coligo-project: '{{coligoProject}}'
-      coligo-region: '{{coligoRegion}}'
-      coligo-resource-group: '{{coligoResourceGroup}}'
+      code-engine-project: '{{codeEngineProject}}'
+      code-engine-region: '{{codeEngineRegion}}'
+      code-engine-resource-group: '{{codeEngineResourceGroup}}'
     schema:
       $ref: form-schema.json

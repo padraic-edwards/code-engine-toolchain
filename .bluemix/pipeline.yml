@@ -163,7 +163,7 @@ stages:
         kubectl create secret docker-registry ${IMAGE_PULL_SECRET_NAME} --docker-server=${REGISTRY_URL} --docker-password=${API_KEY} --docker-username=iamapikey --docker-email=a@b.com
       fi
 
-      IMAGE_REPOSITORY=${REGISTRY_URL}/${REGISTRY_NAMESPACE}/${IMAGE_NAME}:${BUILD_NUMBER}
+      IMAGE_URL=${REGISTRY_URL}/${REGISTRY_NAMESPACE}/${IMAGE_NAME}:${BUILD_NUMBER}
 
       eval "cat << EOF | kubectl apply -f -
       $(cat ${SERVICE_FILE})

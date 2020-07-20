@@ -141,18 +141,19 @@ stages:
       # View build properties
       cat build.properties
 
-      ibmcloud plugin install coligo
+      ibmcloud plugin install code-engine
 
       echo "Check Code Engine project availability"
-      if ibmcloud coligo project get --name ${CODE_ENGINE_PROJECT}; then
+      if ibmcloud ce project get --name ${CODE_ENGINE_PROJECT}; then
         echo -e "Code Engine project ${CODE_ENGINE_PROJECT} found."
       else
-        ibmcloud coligo project create --name ${CODE_ENGINE_PROJECT}
+        ibmcloud ce project create --name ${CODE_ENGINE_PROJECT}
         echo -e "Code Engine project ${CODE_ENGINE_PROJECT} created."
       fi
 
       echo "Load Kube config"
-      eval "$(ibmcloud coligo target --name ${CODE_ENGINE_PROJECT} | grep export)"
+      ibmcloud ce target --name ${CODE_ENGINE_PROJECT}
+      eval "$(ibmcloud ce current | grep export)"
 
       echo -e "Configuring access to private image registry"
       IMAGE_PULL_SECRET_NAME="ibmcloud-toolchain-${PIPELINE_TOOLCHAIN_ID}-${REGISTRY_URL}"
@@ -231,10 +232,11 @@ stages:
       resource_group: ${CODE_ENGINE_RESOURCE_GROUP}
       kubernetes_cluster: dummy-value
     script: |-
-      ibmcloud plugin install coligo
+      ibmcloud plugin install code-engine
 
       echo "Load Kube config"
-      eval "$(ibmcloud coligo target --name ${CODE_ENGINE_PROJECT} | grep export)"
+      ibmcloud ce target --name ${CODE_ENGINE_PROJECT}
+      eval "$(ibmcloud ce current | grep export)"
 
       # Get kube service name from metadata name in service file
       export KUBE_SERVICE_NAME=$(yq read $SERVICE_FILE metadata.name)

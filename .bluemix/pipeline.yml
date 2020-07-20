@@ -153,7 +153,7 @@ stages:
 
       echo "Load Kube config"
       ibmcloud ce target --name ${CODE_ENGINE_PROJECT}
-      eval "$(ibmcloud ce current | grep export)"
+      eval "$(ibmcloud ce project current | grep export)"
 
       echo -e "Configuring access to private image registry"
       IMAGE_PULL_SECRET_NAME="ibmcloud-toolchain-${PIPELINE_TOOLCHAIN_ID}-${REGISTRY_URL}"
@@ -236,7 +236,7 @@ stages:
 
       echo "Load Kube config"
       ibmcloud ce target --name ${CODE_ENGINE_PROJECT}
-      eval "$(ibmcloud ce current | grep export)"
+      eval "$(ibmcloud ce project current | grep export)"
 
       # Get kube service name from metadata name in service file
       export KUBE_SERVICE_NAME=$(yq read $SERVICE_FILE metadata.name)

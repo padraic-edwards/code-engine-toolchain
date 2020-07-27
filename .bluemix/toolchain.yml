@@ -60,6 +60,7 @@ services:
           CODE_ENGINE_PROJECT: '{{form.pipeline.parameters.code-engine-project}}'
           CODE_ENGINE_REGION: '{{form.pipeline.parameters.code-engine-region}}'
           CODE_ENGINE_RESOURCE_GROUP: '{{form.pipeline.parameters.code-engine-resource-group}}'
+          SERVICE_INSTANCE_NAMES: '{{form.pipeline.parameters.service-instance-names}}'
         execute: true
   webide:
     service_id: orion
@@ -75,5 +76,6 @@ form:
       code-engine-project: '{{codeEngineProject}}'
       code-engine-region: '{{codeEngineRegion}}'
       code-engine-resource-group: '{{codeEngineResourceGroup}}'
+      service-instance-names: '{{service-instance-names}}'
     schema:
       $ref: form-schema.json

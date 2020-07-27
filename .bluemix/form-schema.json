@@ -77,6 +77,10 @@
           "api-key"
         ]
       }
+    },
+    "service-instance-names": {
+      "description": "A space delimited list of IBM Cloud service instance names used by the application",
+      "type": "string"
     }
   },
   "required": [
@@ -240,6 +244,12 @@
           }
         }
       ]
+    },
+    {
+      "type": "text",
+      "readonly": false,
+      "title": "Service Instance Names",
+      "key": "service-instance-names"
     }
   ]
 }

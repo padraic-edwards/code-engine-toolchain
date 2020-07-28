@@ -79,7 +79,7 @@
       }
     },
     "service-instance-names": {
-      "description": "A space delimited list of IBM Cloud service instance names used by the application",
+      "description": "A JSON array of names of service instances to be bound to the running application.",
       "type": "string"
     }
   },

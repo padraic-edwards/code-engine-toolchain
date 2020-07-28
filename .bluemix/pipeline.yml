@@ -126,6 +126,9 @@ stages:
   - name: CODE_ENGINE_PROJECT
     value: ${CODE_ENGINE_PROJECT}
     type: text
+  - name: SERVICE_INSTANCE_NAMES
+    value: ${SERVICE_INSTANCE_NAMES}
+    type: text
   jobs:
   - name: Deploy
     type: deployer
@@ -167,18 +170,23 @@ stages:
 
       IMAGE_URL=${REGISTRY_URL}/${REGISTRY_NAMESPACE}/${IMAGE_NAME}:${BUILD_NUMBER}
 
-      ibmcloud ce app create -n ${APP_NAME} -i ${IMAGE_URL} --rs ${IMAGE_PULL_SECRET_NAME}
+      if ibmcloud ce app get -n ${APP_NAME} | grep FAILED;
+      then
+        echo "Code Engine app with name ${APP_NAME} not found, creating it"
+        ibmcloud ce app create -n ${APP_NAME} -i ${IMAGE_URL} --rs ${IMAGE_PULL_SECRET_NAME}
+      else
+        echo "Code Engine app with name ${APP_NAME} found, updating it"
+        ibmcloud ce app update -n ${APP_NAME} -i ${IMAGE_URL} --rs ${IMAGE_PULL_SECRET_NAME}
+      fi
 
-      # bind services, if any
-
-      SERVICES=(${SERVICE_INSTANCES})
-
-      for service in ${SERVICES[@]}
+      # Bind services, if any
+      while read;
       do
-        if ! ibmcloud ce app get -n ${APP_NAME} | grep $service; then
-          ibmcloud ce app bind -n ${APP_NAME} --si $service
+        if ! ibmcloud ce app get -n ${APP_NAME} | grep $service;
+        then
+          ibmcloud ce app bind -n ${APP_NAME} --si "$REPLY";
         fi
-      done
+      done < $(jq -r ".[]" <<< ${SERVICE_INSTANCE_NAMES})
 
       echo "Checking if application is ready..."
 

@@ -170,13 +170,12 @@ stages:
 
       IMAGE_URL=${REGISTRY_URL}/${REGISTRY_NAMESPACE}/${IMAGE_NAME}:${BUILD_NUMBER}
 
-      if ibmcloud ce app get -n ${APP_NAME} | grep FAILED;
-      then
-        echo "Code Engine app with name ${APP_NAME} not found, creating it"
-        ibmcloud ce app create -n ${APP_NAME} -i ${IMAGE_URL} --rs ${IMAGE_PULL_SECRET_NAME}
-      else
+      if ibmcloud ce app get -n ${APP_NAME} | grep Age; then
         echo "Code Engine app with name ${APP_NAME} found, updating it"
         ibmcloud ce app update -n ${APP_NAME} -i ${IMAGE_URL} --rs ${IMAGE_PULL_SECRET_NAME}
+      else
+        echo "Code Engine app with name ${APP_NAME} not found, creating it"
+        ibmcloud ce app create -n ${APP_NAME} -i ${IMAGE_URL} --rs ${IMAGE_PULL_SECRET_NAME}
       fi
 
       # Bind services, if any

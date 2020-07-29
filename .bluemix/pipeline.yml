@@ -185,7 +185,7 @@ stages:
         then
           ibmcloud ce app bind -n ${APP_NAME} --si "$REPLY";
         fi
-      done < $(jq -r ".[]" <<< ${SERVICE_INSTANCE_NAMES})
+      done < <(jq -r ".[]" <<< "${SERVICE_INSTANCE_NAMES}")
 
       echo "Checking if application is ready..."
 

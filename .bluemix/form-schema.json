@@ -66,6 +66,7 @@
     "code-engine-region": {
       "description": "Code Engine Region",
       "type": "string",
+      "disabled": false,
       "validator": {
         "v-type": "k8s-region",
         "params": ["api-key"]

@@ -76,6 +76,6 @@ form:
       code-engine-project: '{{codeEngineProject}}'
       code-engine-region: '{{codeEngineRegion}}'
       code-engine-resource-group: '{{codeEngineResourceGroup}}'
-      service-instance-names: '{{service-instance-names}}'
+      service-instance-names: '{{serviceInstanceNames}}'
     schema:
       $ref: form-schema.json

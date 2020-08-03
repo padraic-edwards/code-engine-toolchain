@@ -147,17 +147,16 @@ stages:
       ibmcloud plugin install code-engine
 
       echo "Check Code Engine project availability"
-      if ibmcloud ce proj get -n ${CODE_ENGINE_PROJECT}; then
+      if ibmcloud ce proj get -n "${CODE_ENGINE_PROJECT}"; then
         echo -e "Code Engine project ${CODE_ENGINE_PROJECT} found."
       else
         echo -e "No Code Engine project with the name ${CODE_ENGINE_PROJECT} found. Creating new project..."
-        ibmcloud ce proj create -n ${CODE_ENGINE_PROJECT}
+        ibmcloud ce proj create -n "${CODE_ENGINE_PROJECT}"
         echo -e "Code Engine project ${CODE_ENGINE_PROJECT} created."
       fi
 
       echo "Load Kube config"
-      ibmcloud ce target -n ${CODE_ENGINE_PROJECT}
-      eval "$(ibmcloud ce proj current | grep export)"
+      ibmcloud ce target -n "${CODE_ENGINE_PROJECT}" -k
 
       echo -e "Configuring access to private image registry"
       IMAGE_PULL_SECRET_NAME="ibmcloud-toolchain-${PIPELINE_TOOLCHAIN_ID}-${REGISTRY_URL}"

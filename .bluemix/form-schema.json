@@ -59,21 +59,23 @@
       "pattern": "^[a-z0-9_]"
     },
     "code-engine-project": {
-      "description": "Code Engine Project",
+      "description": "Code Engine project",
       "type": "string",
       "pattern": "^[a-z0-9_]"
     },
     "code-engine-region": {
-      "description": "Code Engine Region",
+      "description": "Code Engine region",
       "type": "string",
       "disabled": false,
       "validator": {
         "v-type": "k8s-region",
-        "params": ["api-key"]
+        "params": [
+          "api-key"
+        ]
       }
     },
     "code-engine-resource-group": {
-      "description": "Code Engine Resource Group",
+      "description": "Code Engine resource group",
       "type": "string",
       "validator": {
         "v-type": "resource-group",

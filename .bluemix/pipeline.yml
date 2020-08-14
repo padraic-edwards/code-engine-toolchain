@@ -156,7 +156,7 @@ stages:
       fi
 
       echo "Load Kube config"
-      ibmcloud ce target -n "${CODE_ENGINE_PROJECT}" -k
+      ibmcloud ce proj target -n "${CODE_ENGINE_PROJECT}" -k
 
       echo -e "Configuring access to private image registry"
       IMAGE_PULL_SECRET_NAME="ibmcloud-toolchain-${PIPELINE_TOOLCHAIN_ID}-${REGISTRY_URL}"
@@ -247,7 +247,7 @@ stages:
       ibmcloud plugin install code-engine
 
       echo "Load Kube config"
-      ibmcloud ce target --name ${CODE_ENGINE_PROJECT}
+      ibmcloud ce proj target --name ${CODE_ENGINE_PROJECT}
       eval "$(ibmcloud ce project current | grep export)"
 
       # Get kube service name from metadata name in service file

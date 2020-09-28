@@ -222,36 +222,6 @@
       ]
     },
     {
-      "type": "table",
-      "columnCount": 1,
-      "widths": [
-        "100%"
-      ],
-      "items": [
-        {
-          "type": "label",
-          "title": {
-            "$ref": "#/messages/deploy.clusterDescription"
-          }
-        }
-      ]
-    },
-    {
-      "type": "table",
-      "columnCount": 1,
-      "widths": [
-        "100%"
-      ],
-      "items": [
-        {
-          "type": "label",
-          "title": {
-            "$ref": "#/messages/deploy.clusternsDescription"
-          }
-        }
-      ]
-    },
-    {
       "type": "text",
       "readonly": false,
       "title": "Service Instance Names",

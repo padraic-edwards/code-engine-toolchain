@@ -126,20 +126,22 @@ stages:
   - name: CODE_ENGINE_PROJECT
     value: ${CODE_ENGINE_PROJECT}
     type: text
+  - name: CODE_ENGINE_RESOURCE_GROUP
+    value: ${CODE_ENGINE_RESOURCE_GROUP}
+    type: text
   - name: SERVICE_INSTANCE_NAMES
     value: ${SERVICE_INSTANCE_NAMES}
     type: text
   jobs:
   - name: Deploy
-    type: deployer
-    deploy_type: kubernetes
+    type: builder
+    build_type: cr
     target:
       api_key: ${API_KEY}
       region_id: ${CODE_ENGINE_REGION}
-      resource_group: ${CODE_ENGINE_RESOURCE_GROUP}
-      kubernetes_cluster: dummy-value
     script: |-
       #!/bin/bash
+      ibmcloud target -g ${CODE_ENGINE_RESOURCE_GROUP}
 
       # View build properties
       cat build.properties
@@ -236,14 +238,13 @@ stages:
       echo "=========================================================="
       echo -e "View the application at: $APPLICATION_URL"
   - name: Test
-    type: deployer
-    deploy_type: kubernetes
+    type: builder
+    build_type: cr
     target:
       api_key: ${API_KEY}
       region_id: ${CODE_ENGINE_REGION}
-      resource_group: ${CODE_ENGINE_RESOURCE_GROUP}
-      kubernetes_cluster: dummy-value
     script: |-
+      ibmcloud target -g ${CODE_ENGINE_RESOURCE_GROUP}
       ibmcloud plugin install code-engine
 
       echo "Load Kube config"

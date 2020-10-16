@@ -33,10 +33,10 @@ services:
       repo_url: >
         $env.type === 'link' ? $env.app_repo :
           $env.sourceZipUrl ? '{{sourceZipUrl}}' :
-            'https://github.com/open-toolchain/hello-knative-service'
+            'http://github.com/IBM/java-spring-app'
       source_repo_url: >
         $env.type === 'fork' || $env.type === 'clone' ? $env.app_repo :
-          $env.sourceZipUrl ? '{{sourceZipUrl}}' : 'https://github.com/open-toolchain/hello-knative-service'
+          $env.sourceZipUrl ? '{{sourceZipUrl}}' : 'http://github.com/IBM/java-spring-app'
       type: $env.type || 'clone'
       has_issues: true
       enable_traceability: true
